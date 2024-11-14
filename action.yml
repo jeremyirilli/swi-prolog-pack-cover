@@ -27,25 +27,22 @@ runs:
       run: swipl -t check_installation
       shell: bash
 
+    - name: Install rologp
+      run: |
+        export R_LIBS_USER=$HOME/Rlibs
+        swipl -t "pack_install(rologp, [interactive(false), link(false)])"
+      shell: bash
+
     - name: Install pack
       run: |
-        swipl -t "pack_install(., [interactive(false), link(false)])"
-      shell: bash
-
-    - name: Exit SWI-Prolog
-      run: |
-        echo "Exiting SWI-Prolog after installing packages."
-        pkill -f swipl
-      shell: bash
-
-    - name: Reopen SWI-Prolog and load packages
-      run: |
-        echo "Reopening SWI-Prolog and loading packages."
-        swipl -t "use_module('.')" 
+        export R_LIBS_USER=$HOME/Rlibs
+        swipl -t "pack_install(interval, [interactive(false), link(false)])"
       shell: bash
 
     - name: Run tests with coverage
-      run: swipl -s "${{ github.action_path }}/action.pl"
+      run: |
+        export R_LIBS_USER=$HOME/Rlibs
+        swipl -s "${{ github.action_path }}/action.pl"
       shell: bash
 
 branding:

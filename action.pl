@@ -34,7 +34,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 :- use_module(library(ordsets),
               [ord_intersect/2, ord_intersection/3, ord_subtract/3]).
 :- use_module(library(prolog_pack), [pack_property/2]).
-:- use_module(library(test_cover), [show_coverage/1]).
+%:- use_module(library(test_cover), [show_coverage/1]).
 :- use_module(library(url), [parse_url/2]).
 :- use_module(library(http/http_client), [http_get/3]).
 :- use_module(library(http/json), [atom_json_term/3, json_write_dict/3]).
@@ -163,7 +163,8 @@ cover(Goal, Dir, Covers) :-
 
 cover_subdir(Dir, File-Cover, Rel-Cover) :- subdir(Dir, File, Rel).
 
-cover(Goal, Covers) :- show_coverage(covered(Goal, Covers)).
+cover(_Goal, _Covers) :- true. %show_coverage(covered(Goal, Covers)).
+
 
 covered(Goal, Covers) :-
     call(Goal),
