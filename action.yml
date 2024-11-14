@@ -28,7 +28,9 @@ runs:
       shell: bash
 
     - name: Install pack
-      run: swipl -t "pack_install(., [interactive(false), link(false)])"
+      run: |
+        swipl -t "pack_install(RInside, [interactive(false), link(false)])"
+        swipl -t "pack_install(., [interactive(false), link(false)])"
       shell: bash
 
     - name: Exit SWI-Prolog
